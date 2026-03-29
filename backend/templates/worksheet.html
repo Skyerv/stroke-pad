@@ -24,7 +24,7 @@
     }
 
     .entry {
-      border: 1px solid #8e8e8e;
+      border: 2px solid #777;
       margin-bottom: 12px;
       page-break-inside: avoid;
     }
@@ -125,7 +125,7 @@
       width: 26px;
       height: 26px;
       display: inline-flex;
-      border: 1px solid #d8d8d8;
+      border: 2px solid #cfcfcf;
       background: #fff;
       overflow: visible;
       flex: 0 0 auto;
@@ -190,12 +190,12 @@
           {% set target_index = loop.index0 %}
           <span class="stroke-diagram">
             <svg viewBox="0 0 1024 1024" width="100%" height="100%">
-              <g transform="translate(32,996) scale(0.94,-0.94)">
+              <g transform="translate(18,1008) scale(0.97,-0.97)">
                 {% for stroke_path in stroke_char.strokes[:12] %}
                   {% if loop.index0 < target_index %}
                   <path
                     d="{{ stroke_path | safe }}"
-                    fill="#c8c8c8"
+                    fill="#222222"
                   />
                   {% elif loop.index0 == target_index %}
                   <path

@@ -2,8 +2,10 @@ const path = require("path");
 const fs = require("fs");
 const { app, BrowserWindow, dialog, ipcMain } = require("electron");
 
+let win;
+
 function createWindow() {
-  const window = new BrowserWindow({
+  win = new BrowserWindow({
     width: 920,
     height: 700,
     frame: false,
@@ -16,7 +18,7 @@ function createWindow() {
     icon: path.join(__dirname, "assets/icon.png"),
   });
 
-  window.loadFile(path.join(__dirname, "index.html"));
+  win.loadFile(path.join(__dirname, "index.html"));
 }
 
 ipcMain.handle("save-pdf-file", async (_, payload) => {
@@ -48,4 +50,24 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
+});
+
+ipcMain.on("minimize", () => {
+  if (win) {
+    win.minimize();
+  }
+});
+
+ipcMain.on("maximize", () => {
+  if (!win) return;
+
+  if (win.isMaximized()) {
+    win.unmaximize();
+  } else {
+    win.maximize();
+  }
+});
+
+ipcMain.on("close", () => {
+  if (win) win.close();
 });

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hanzi Practice Sheet Generator</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <h1>Hanzi Practice Sheet Generator</h1>
+    <p class="subtitle">Enter comma-separated hanzi words or characters.</p>
+
+    <label for="text-input">Hanzi list</label>
+    <textarea id="text-input" placeholder="安装, 岸, 暗, 熬夜, 把握, 摆"></textarea>
+
+    <div class="controls">
+      <label for="grid-count">Grid boxes per row</label>
+      <input id="grid-count" type="number" min="4" max="20" value="10">
+    </div>
+
+    <button id="generate-btn">Generate PDF</button>
+    <p id="status" class="status">Idle</p>
+  </main>
+  <script src="./renderer.js"></script>
+</body>
+</html>

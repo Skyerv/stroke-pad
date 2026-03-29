@@ -186,12 +186,12 @@
         {{ stroke_char.hanzi }}
         {% if stroke_char.strokes %}
         <span class="stroke-sequence">
-          {% for current_stroke in stroke_char.strokes[:12] %}
+          {% for current_stroke in stroke_char.strokes %}
           {% set target_index = loop.index0 %}
           <span class="stroke-diagram">
             <svg viewBox="0 0 1024 1024" width="100%" height="100%">
               <g transform="translate(18,1008) scale(0.97,-0.97)">
-                {% for stroke_path in stroke_char.strokes[:12] %}
+                {% for stroke_path in stroke_char.strokes %}
                   {% if loop.index0 < target_index %}
                   <path
                     d="{{ stroke_path | safe }}"
@@ -208,9 +208,6 @@
             </svg>
           </span>
           {% endfor %}
-          {% if stroke_char.strokes|length > 12 %}
-          <span class="stroke-more">+{{ stroke_char.strokes|length - 12 }}</span>
-          {% endif %}
         </span>
         {% endif %}
       </span>

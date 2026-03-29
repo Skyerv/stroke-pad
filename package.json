@@ -8,12 +8,27 @@
     "backend": "python -m uvicorn backend.main:app --reload --port 8000",
     "frontend": "electron ./frontend/main.js",
     "start": "electron ./frontend/main.js",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "build": "electron-builder"
   },
-  "dependencies": {
+  "dependencies": { },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "electron-builder": "^26.8.1",
     "electron": "^37.3.1"
   },
-  "devDependencies": {
-    "concurrently": "^9.2.1"
+  "build": {
+    "appId": "com.strokepad.app",
+    "productName": "StrokePad",
+    "directories": {
+      "buildResources": "frontend/assets"
+    },
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "frontend/assets/icon.png"
+    }
   }
 }

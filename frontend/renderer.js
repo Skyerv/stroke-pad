@@ -3,6 +3,18 @@ const textInput = document.getElementById("text-input");
 const gridCountInput = document.getElementById("grid-count");
 const statusText = document.getElementById("status");
 
+document.getElementById("min-btn").onclick = () => {
+  window.windowControls.minimize();
+};
+
+document.getElementById("max-btn").onclick = () => {
+  window.windowControls.maximize();
+};
+
+document.getElementById("close-btn").onclick = () => {
+  window.windowControls.close();
+};
+
 function setStatus(message) {
   statusText.textContent = message;
 }

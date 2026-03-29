@@ -40,14 +40,16 @@
     }
 
     .practice-row {
-      display: grid;
-      grid-template-columns: repeat(var(--cols), 1fr);
+      display: flex;
       border-bottom: 1px solid #b4b4b4;
       min-height: 78px;
     }
 
     .grid-cell {
       position: relative;
+      width: 78px;
+      height: 78px;
+      flex: 0 0 78px;
       border-right: 1px solid #b8b8b8;
       display: flex;
       align-items: center;
@@ -154,19 +156,30 @@
   {% for entry in entries %}
   <section class="entry">
     <div class="pinyin-row">{{ entry.pinyin }}</div>
-    <div class="practice-row" style="--cols: {{ grid_count }};">
-      {% for i in range(grid_count) %}
-      <div class="grid-cell{% if i == 2 or i == 3 %} trace{% endif %}">
-        {% if i == 0 %}
-          {{ entry.display_hanzi }}
-        {% elif i == 2 %}
-          {{ entry.trace_chars[0] }}
-        {% elif i == 3 %}
-          {{ entry.trace_chars[1] }}
-        {% endif %}
-      </div>
+    {% set chars = entry.hanzi_chars if entry.hanzi_chars else [entry.display_hanzi] %}
+    {% set used_cells = chars|length * 3 %}
+    <div class="practice-row">
+      {% for char in chars %}
+      <div class="grid-cell">{{ char }}</div>
+      {% endfor %}
+
+      {% for _ in range(2) %}
+        {% for char in chars %}
+        <div class="grid-cell trace">{{ char }}</div>
+        {% endfor %}
+      {% endfor %}
+
+      {% for _ in range([grid_count - used_cells, 0]|max) %}
+      <div class="grid-cell"></div>
       {% endfor %}
     </div>
+    {% if chars|length > 2 %}
+    <div class="practice-row">
+      {% for _ in range(grid_count) %}
+      <div class="grid-cell"></div>
+      {% endfor %}
+    </div>
+    {% endif %}
     <div class="stroke-row">
       {% for stroke_char in entry.strokes %}
       <span class="stroke-char">
@@ -177,7 +190,7 @@
           {% set target_index = loop.index0 %}
           <span class="stroke-diagram">
             <svg viewBox="0 0 1024 1024" width="100%" height="100%">
-              <g transform="translate(0,1024) scale(1,-1)">
+              <g transform="translate(32,996) scale(0.94,-0.94)">
                 {% for stroke_path in stroke_char.strokes[:12] %}
                   {% if loop.index0 < target_index %}
                   <path

@@ -2,11 +2,11 @@
   "name": "stroke-pad",
   "version": "0.1.0",
   "private": true,
-  "description": "Desktop Hanzi practice sheet generator",
-  "main": "frontend/main.js",
+  "description": "Local Electron app for generating Hanzi practice sheets",
+  "main": "src/main/index.js",
   "scripts": {
-    "start": "electron ./frontend/main.js",
-    "dev": "electron ./frontend/main.js",
+    "start": "electron .",
+    "dev": "electron .",
     "test": "node --test",
     "build": "electron-builder"
   },
@@ -19,17 +19,16 @@
     "appId": "com.strokepad.app",
     "productName": "StrokePad",
     "directories": {
-      "buildResources": "frontend/assets"
+      "buildResources": "src/assets"
     },
     "files": [
-      "frontend/**/*",
-      "backend/data/**/*",
+      "src/**/*",
       "package.json",
       "README.md"
     ],
     "win": {
       "target": "nsis",
-      "icon": "frontend/assets/icon.png"
+      "icon": "src/assets/icon.png"
     }
   }
 }

@@ -1,37 +1,42 @@
 # StrokePad
 
-Desktop Electron app for generating printable Chinese Hanzi practice sheets.
+Electron desktop app for generating printable Hanzi practice sheets.
 
-## Stack
+## Project Layout
 
-- Electron renderer UI: `frontend/`
-- Local worksheet/data logic: `frontend/lib/`
-- Local dataset: `backend/data/`
-- PDF export: Electron `printToPDF`
+```text
+src/
+  assets/
+  data/
+    hanzi/
+      raw/
+    hsk/
+  main/
+  preload/
+  renderer/
+  shared/
+test/
+tools/
+  data-prep/
+  legacy-backend/
+```
 
-## Run
+## Commands
 
 ```powershell
 npm install
-npm run dev
-```
-
-## Build
-
-```powershell
+npm start
+npm test
 npm run build
 ```
 
-## Usage
-
-1. Enter comma-separated Hanzi tokens.
-2. Adjust the grid count from 4 to 20.
-3. Click **Generate PDF**.
-4. Choose a save location in the file dialog.
-
 ## Notes
 
-- The app runs locally and does not call a backend server.
-- Input is split on commas and trimmed.
-- Unknown tokens still generate a worksheet with fallback `"unknown"` metadata.
-- Hanzi cell text scales with the available practice box size so dense grids stay balanced.
+- The app runs fully locally inside Electron.
+- `src/main` owns lifecycle, IPC, native dialogs, and file access.
+- `src/preload` exposes a narrow, explicit API surface.
+- `src/renderer` contains only UI logic and user interaction code.
+- `src/data/hsk` is the source of truth for HSK lesson content.
+- `src/data/hanzi` now holds the dictionary, stroke data, and raw source files used to build them.
+- `tools/data-prep` contains the Python scripts used to regenerate the Hanzi datasets.
+- `tools/legacy-backend` is an archived reference of the removed FastAPI implementation and is not part of the Electron runtime.

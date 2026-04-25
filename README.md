@@ -38,4 +38,3 @@ npm run build
 - `src/data/hsk` is the source of truth for HSK lesson content.
 - `src/data/hanzi` now holds the dictionary, stroke data, and raw source files used to build them.
 - `tools/data-prep` contains the Python scripts used to regenerate the Hanzi datasets.
-- `tools/legacy-backend` is an archived reference of the removed FastAPI implementation and is not part of the Electron runtime.

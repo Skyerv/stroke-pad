@@ -5,15 +5,13 @@
   "description": "Desktop Hanzi practice sheet generator",
   "main": "frontend/main.js",
   "scripts": {
-    "backend": "python -m uvicorn backend.main:app --reload --port 8000",
-    "frontend": "electron ./frontend/main.js",
     "start": "electron ./frontend/main.js",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "dev": "electron ./frontend/main.js",
+    "test": "node --test",
     "build": "electron-builder"
   },
   "dependencies": { },
   "devDependencies": {
-    "concurrently": "^9.2.1",
     "electron-builder": "^26.8.1",
     "electron": "^37.3.1"
   },
@@ -24,7 +22,10 @@
       "buildResources": "frontend/assets"
     },
     "files": [
-      "**/*"
+      "frontend/**/*",
+      "backend/data/**/*",
+      "package.json",
+      "README.md"
     ],
     "win": {
       "target": "nsis",

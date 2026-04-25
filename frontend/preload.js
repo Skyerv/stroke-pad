@@ -1,7 +1,7 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electronAPI", {
-  savePdfFile: (byteArray) => ipcRenderer.invoke("save-pdf-file", { byteArray }),
+  generatePracticeSheet: (payload) => ipcRenderer.invoke("generate-practice-sheet", payload),
 });
 
 contextBridge.exposeInMainWorld("windowControls", {

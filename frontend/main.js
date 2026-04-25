@@ -1,6 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 const { app, BrowserWindow, dialog, ipcMain } = require("electron");
+const { buildWorksheet } = require("./lib/practice-sheet");
+const { renderPdfFromHtml } = require("./lib/pdf-export");
 
 let win;
 
@@ -18,10 +20,22 @@ function createWindow() {
     icon: path.join(__dirname, "assets/icon.png"),
   });
 
+  win.on("closed", () => {
+    win = null;
+  });
+
   win.loadFile(path.join(__dirname, "index.html"));
 }
 
-ipcMain.handle("save-pdf-file", async (_, payload) => {
+ipcMain.handle("generate-practice-sheet", async (_, payload) => {
+  const text = String(payload?.text ?? "").trim();
+  const gridCountRaw = Number(payload?.gridCount ?? 10);
+  const gridCount = Number.isFinite(gridCountRaw) ? Math.min(Math.max(Math.trunc(gridCountRaw), 4), 20) : 10;
+
+  if (!text) {
+    return { canceled: false, error: "Please enter at least one hanzi token." };
+  }
+
   const { canceled, filePath } = await dialog.showSaveDialog({
     title: "Save Hanzi Practice Sheet",
     defaultPath: "hanzi_practice_sheet.pdf",
@@ -32,8 +46,9 @@ ipcMain.handle("save-pdf-file", async (_, payload) => {
     return { canceled: true };
   }
 
-  const buffer = Buffer.from(payload.byteArray);
-  fs.writeFileSync(filePath, buffer);
+  const { html } = buildWorksheet({ text, gridCount });
+  const pdfBytes = await renderPdfFromHtml(html);
+  await fs.promises.writeFile(filePath, pdfBytes);
   return { canceled: false, filePath };
 });
 

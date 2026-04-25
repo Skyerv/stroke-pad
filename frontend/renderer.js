@@ -32,28 +32,13 @@ async function handleGenerate() {
   setStatus("Generating PDF...");
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, grid_count: gridCount })
-    });
+    const result = await window.electronAPI.generatePracticeSheet({ text, gridCount });
 
-    if (!response.ok) {
-      let detail = `Request failed (${response.status})`;
-      try {
-        const errorJson = await response.json();
-        detail = errorJson.detail || detail;
-      } catch (_) {
-        // Keep fallback message when backend is unavailable or non-JSON.
-      }
-      throw new Error(detail);
+    if (result?.error) {
+      throw new Error(result.error);
     }
 
-    const arrayBuffer = await response.arrayBuffer();
-    const byteArray = Array.from(new Uint8Array(arrayBuffer));
-    const result = await window.electronAPI.savePdfFile(byteArray);
-
-    if (result.canceled) {
+    if (result?.canceled) {
       setStatus("Save canceled.");
     } else {
       setStatus(`Saved: ${result.filePath}`);

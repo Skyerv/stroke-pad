@@ -40,21 +40,24 @@
     }
 
     .practice-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
       border-bottom: 1px solid #b4b4b4;
-      min-height: 78px;
+      /* min-height: 78px; */
     }
 
     .grid-cell {
       position: relative;
-      width: 78px;
+      /* width: 78px;
       height: 78px;
-      flex: 0 0 78px;
+      flex: 0 0 78px; */
+      width: 100%;
+      aspect-ratio: 1 / 1;
       border-right: 1px solid #b8b8b8;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 56px;
+      font-size: 48px;
       line-height: 1;
       font-family: "KaiTi", "STKaiti", "Kaiti SC", "Noto Serif CJK SC", serif;
     }
@@ -158,7 +161,7 @@
     <div class="pinyin-row">{{ entry.pinyin }}</div>
     {% set chars = entry.hanzi_chars if entry.hanzi_chars else [entry.display_hanzi] %}
     {% set used_cells = chars|length * 3 %}
-    <div class="practice-row">
+    <div class="practice-row" style="--cols: {{ grid_count }};">
       {% for char in chars %}
       <div class="grid-cell">{{ char }}</div>
       {% endfor %}
@@ -174,7 +177,7 @@
       {% endfor %}
     </div>
     {% if chars|length > 2 %}
-    <div class="practice-row">
+    <div class="practice-row" style="--cols: {{ grid_count }};">
       {% for _ in range(grid_count) %}
       <div class="grid-cell"></div>
       {% endfor %}

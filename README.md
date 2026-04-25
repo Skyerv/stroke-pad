@@ -18,7 +18,6 @@ src/
 test/
 tools/
   data-prep/
-  legacy-backend/
 ```
 
 ## Commands

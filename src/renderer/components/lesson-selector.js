@@ -2,20 +2,27 @@ import { requireElement } from "../utils/dom.js";
 
 export class LessonSelector {
   constructor(rootElement, onVocabularyChange) {
-    this.levelSelect = requireElement(rootElement, "#hsk-level");
+    this.bookSelect = requireElement(rootElement, "#hsk-book");
     this.lessonSelect = requireElement(rootElement, "#hsk-lesson");
     this.onVocabularyChange = onVocabularyChange;
     this.isBound = false;
     this.lessonData = {
-      levelLessonCounts: {},
+      books: [],
       lessons: {},
     };
   }
 
   initialize(lessonData, initialSelection) {
     this.lessonData = lessonData;
-    this.renderLevelOptions();
-    this.setSelection(initialSelection.level, initialSelection.lesson);
+    this.renderBookOptions();
+
+    const firstBook = this.lessonData.books[0];
+    const selection = initialSelection || {
+      book: firstBook ? firstBook.id : "",
+      lesson: firstBook ? firstBook.lessons[0] : null,
+    };
+
+    this.setSelection(selection.book, selection.lesson);
     this.bindEvents();
   }
 
@@ -24,9 +31,10 @@ export class LessonSelector {
       return;
     }
 
-    this.levelSelect.addEventListener("change", () => {
-      this.renderLessonOptions(Number(this.levelSelect.value));
-      this.lessonSelect.value = "1";
+    this.bookSelect.addEventListener("change", () => {
+      const bookId = this.bookSelect.value;
+      this.renderLessonOptions(bookId);
+      this.lessonSelect.value = String(this.firstLessonOf(bookId) ?? "");
       this.emitSelection();
     });
 
@@ -37,45 +45,58 @@ export class LessonSelector {
     this.isBound = true;
   }
 
-  renderLevelOptions() {
-    this.levelSelect.innerHTML = "";
+  findBook(bookId) {
+    return this.lessonData.books.find((book) => book.id === String(bookId));
+  }
 
-    Object.keys(this.lessonData.levelLessonCounts).forEach((level) => {
+  firstLessonOf(bookId) {
+    const book = this.findBook(bookId);
+    return book && book.lessons.length ? book.lessons[0] : null;
+  }
+
+  renderBookOptions() {
+    this.bookSelect.innerHTML = "";
+
+    this.lessonData.books.forEach((book) => {
       const option = document.createElement("option");
-      option.value = level;
-      option.textContent = `HSK ${level}`;
-      this.levelSelect.appendChild(option);
+      option.value = book.id;
+      option.textContent = book.label;
+      this.bookSelect.appendChild(option);
     });
   }
 
-  renderLessonOptions(level) {
-    const lessonCount = Number(this.lessonData.levelLessonCounts[level] || 0);
+  renderLessonOptions(bookId) {
+    const book = this.findBook(bookId);
     this.lessonSelect.innerHTML = "";
 
-    for (let lesson = 1; lesson <= lessonCount; lesson += 1) {
+    if (!book) {
+      return;
+    }
+
+    book.lessons.forEach((lesson) => {
       const option = document.createElement("option");
       option.value = String(lesson);
       option.textContent = `Lesson ${lesson}`;
       this.lessonSelect.appendChild(option);
-    }
+    });
   }
 
-  setSelection(level, lesson) {
-    this.levelSelect.value = String(level);
-    this.renderLessonOptions(level);
+  setSelection(bookId, lesson) {
+    this.bookSelect.value = String(bookId);
+    this.renderLessonOptions(bookId);
     this.lessonSelect.value = String(lesson);
 
     if (this.lessonSelect.value !== String(lesson)) {
-      this.lessonSelect.value = "1";
+      this.lessonSelect.value = String(this.firstLessonOf(bookId) ?? "");
     }
 
     this.emitSelection();
   }
 
   emitSelection() {
-    const level = Number(this.levelSelect.value);
-    const lesson = Number(this.lessonSelect.value);
-    const vocabulary = this.lessonData.lessons?.[level]?.[lesson] || [];
-    this.onVocabularyChange({ level, lesson, vocabulary });
+    const book = this.bookSelect.value;
+    const lesson = this.lessonSelect.value;
+    const vocabulary = this.lessonData.lessons?.[book]?.[lesson] || [];
+    this.onVocabularyChange({ book, lesson, vocabulary });
   }
 }

@@ -1,47 +1,56 @@
 const { hsk1 } = require("./hsk-1");
 const { hsk2 } = require("./hsk-2");
 const { hsk3 } = require("./hsk-3");
-const { hsk4 } = require("./hsk-4");
-const { hsk5 } = require("./hsk-5");
-const { hsk6 } = require("./hsk-6");
+const { hsk4a } = require("./hsk-4a");
+const { hsk4b } = require("./hsk-4b");
+const { hsk5a } = require("./hsk-5a");
+const { hsk5b } = require("./hsk-5b");
 
-const HSK_LEVELS = Object.freeze({
-  1: hsk1,
-  2: hsk2,
-  3: hsk3,
-  4: hsk4,
-  5: hsk5,
-  6: hsk6,
-});
+// Ordered list of books; drives the Book dropdown order in the UI.
+const HSK_BOOKS = Object.freeze([hsk1, hsk2, hsk3, hsk4a, hsk4b, hsk5a, hsk5b]);
 
-function getLevelLessonCounts() {
-  return Object.keys(HSK_LEVELS).reduce((result, level) => {
-    result[level] = Object.keys(HSK_LEVELS[level].lessons).length;
+const HSK_BOOKS_BY_ID = Object.freeze(
+  HSK_BOOKS.reduce((result, book) => {
+    result[book.id] = book;
     return result;
-  }, {});
+  }, {})
+);
+
+function getLessonNumbers(book) {
+  return Object.keys(book.lessons)
+    .map(Number)
+    .sort((a, b) => a - b);
 }
 
-function getLessonVocabulary(level, lesson) {
-  const levelData = HSK_LEVELS[level];
-  if (!levelData) {
+function getBooks() {
+  return HSK_BOOKS.map((book) => ({
+    id: book.id,
+    label: book.label,
+    lessons: getLessonNumbers(book),
+  }));
+}
+
+function getLessonVocabulary(bookId, lesson) {
+  const book = HSK_BOOKS_BY_ID[bookId];
+  if (!book) {
     return [];
   }
 
-  const lessonVocabulary = levelData.lessons[lesson];
-  return Array.isArray(lessonVocabulary) ? lessonVocabulary : [];
+  const vocabulary = book.lessons[lesson];
+  return Array.isArray(vocabulary) ? vocabulary : [];
 }
 
 const HSK_LESSON_DATA = Object.freeze({
-  levelLessonCounts: getLevelLessonCounts(),
-  lessons: Object.keys(HSK_LEVELS).reduce((result, level) => {
-    result[level] = HSK_LEVELS[level].lessons;
+  books: getBooks(),
+  lessons: HSK_BOOKS.reduce((result, book) => {
+    result[book.id] = book.lessons;
     return result;
   }, {}),
 });
 
 module.exports = {
-  HSK_LEVELS,
+  HSK_BOOKS,
   HSK_LESSON_DATA,
+  getBooks,
   getLessonVocabulary,
-  getLevelLessonCounts,
 };

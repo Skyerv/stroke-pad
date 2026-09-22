@@ -36,7 +36,7 @@ export class AppPage {
 
     try {
       const lessonData = await this.hskService.loadLessonData();
-      this.lessonSelector.initialize(lessonData, { level: 1, lesson: 1 });
+      this.lessonSelector.initialize(lessonData);
       this.statusMessage.set("Idle");
     } catch (error) {
       this.logger.error("Failed to initialize the application.", error);

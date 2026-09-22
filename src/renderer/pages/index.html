@@ -4,24 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hanzi Practice Sheet Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <div class="titlebar">
-    <div class="title">StrokePad</div>
+    <div class="title">♥ StrokePad</div>
     <div class="window-controls">
-      <button id="min-btn" type="button" aria-label="Minimize window">-</button>
-      <button id="max-btn" type="button" aria-label="Toggle maximize window">[]</button>
-      <button id="close-btn" type="button" aria-label="Close window">x</button>
+      <button id="min-btn" type="button" aria-label="Minimize window">–</button>
+      <button id="max-btn" type="button" aria-label="Toggle maximize window">□</button>
+      <button id="close-btn" type="button" aria-label="Close window">✕</button>
     </div>
   </div>
 
   <div class="app-shell">
     <main class="app">
+      <span class="deco deco-star deco-star-1" aria-hidden="true">✦</span>
+      <span class="deco deco-heart deco-heart-1" aria-hidden="true">♥</span>
+      <span class="deco deco-star deco-star-2" aria-hidden="true">✧</span>
+      <span class="deco deco-heart deco-heart-2" aria-hidden="true">♥</span>
       <header class="app-header">
-        <p class="eyebrow">Study Mode</p>
+        <p class="eyebrow">♡ Study Mode ♡</p>
         <h1>Hanzi Practice Sheet Generator</h1>
-        <p class="subtitle">Paste comma-separated hanzi words and create a printable worksheet in seconds.</p>
+        <p class="subtitle">Paste comma-separated hanzi words and create a printable worksheet in seconds. ⋆｡°✩</p>
       </header>
 
       <section class="panel">
@@ -44,7 +51,7 @@
           <input id="practice-rows" type="number" min="1" max="8" value="2">
         </div>
 
-        <button id="generate-btn" class="generate-btn" type="button">Generate PDF</button>
+        <button id="generate-btn" class="generate-btn" type="button">✿ Generate PDF ✿</button>
         <p id="status" class="status">Idle</p>
       </section>
     </main>

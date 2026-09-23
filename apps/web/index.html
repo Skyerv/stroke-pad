@@ -4,66 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ff7cbb">
-  <title>StrokePad — Hanzi Practice Sheets</title>
+  <meta name="description" content="StrokePad turns HSK lessons or your own hanzi into printable stroke-practice worksheets — cute, free, and works offline.">
+  <title>StrokePad — Kawaii Hanzi Practice Sheets</title>
 </head>
-<body>
-  <div class="titlebar" aria-hidden="true">
-    <div class="title">♥ StrokePad</div>
-    <div class="window-controls">
-      <span class="fake-btn">–</span>
-      <span class="fake-btn">□</span>
-      <span class="fake-btn">✕</span>
+<body class="landing">
+  <span class="deco deco-star s1" aria-hidden="true">✦</span>
+  <span class="deco deco-heart h1" aria-hidden="true">♥</span>
+  <span class="deco deco-star s2" aria-hidden="true">✧</span>
+  <span class="deco deco-heart h2" aria-hidden="true">♥</span>
+  <span class="deco deco-star s3" aria-hidden="true">⋆</span>
+  <span class="deco deco-heart h3" aria-hidden="true">♡</span>
+
+  <main class="hero">
+    <div class="hero-window">
+      <div class="hero-titlebar" aria-hidden="true">
+        <span class="hero-dot"></span>
+        <span class="hero-titlebar-label">strokepad.exe</span>
+        <span class="hero-controls"><i>–</i><i>□</i><i>✕</i></span>
+      </div>
+
+      <div class="hero-body">
+        <img class="hero-logo" src="/icon.svg" alt="StrokePad heart logo" width="112" height="112">
+
+        <p class="hero-eyebrow">♡ Kawaii Study Tool ♡</p>
+        <h1 class="hero-title">StrokePad</h1>
+        <p class="hero-tagline">Turn HSK lessons or your own hanzi into pretty,<br>printable stroke-practice worksheets. ⋆｡°✩</p>
+
+        <ul class="hero-features">
+          <li>✿ HSK 1–5 presets</li>
+          <li>✎ Real stroke order</li>
+          <li>🖨 Printable PDF</li>
+          <li>❤ Free &amp; offline</li>
+        </ul>
+
+        <a class="hero-cta" href="/app">✿ Enter StrokePad ✿</a>
+        <p class="hero-note">No sign-up · works right in your browser</p>
+      </div>
     </div>
-  </div>
 
-  <main class="app">
-    <span class="deco deco-star deco-star-1" aria-hidden="true">✦</span>
-    <span class="deco deco-heart deco-heart-1" aria-hidden="true">♥</span>
-    <span class="deco deco-star deco-star-2" aria-hidden="true">✧</span>
-
-    <header class="app-header">
-      <p class="eyebrow">♡ Study Mode ♡</p>
-      <h1>Hanzi Practice Sheet Generator</h1>
-      <p class="subtitle">Pick an HSK lesson or paste your own hanzi, then print a practice sheet. ⋆｡°✩</p>
-    </header>
-
-    <div class="layout">
-      <section class="panel controls-panel">
-        <div class="lesson-selector">
-          <div class="selector-field">
-            <label for="hsk-book">Book</label>
-            <select id="hsk-book"></select>
-          </div>
-          <div class="selector-field">
-            <label for="hsk-lesson">Lesson</label>
-            <select id="hsk-lesson"></select>
-          </div>
-        </div>
-
-        <label for="text-input">Hanzi list</label>
-        <textarea id="text-input" placeholder="安装, 岸, 暗, 熬夜, 把握, 摆"></textarea>
-
-        <div class="controls">
-          <label for="practice-rows">Practice rows</label>
-          <input id="practice-rows" type="number" min="1" max="8" value="2">
-        </div>
-
-        <div class="button-row">
-          <button id="generate-btn" class="generate-btn" type="button">✿ Generate ✿</button>
-          <button id="print-btn" class="ghost-btn" type="button" disabled>🖨 Print / Save PDF</button>
-          <button id="share-btn" class="ghost-btn" type="button">🔗 Copy link</button>
-        </div>
-
-        <p id="status" class="status">Loading…</p>
-      </section>
-
-      <section class="panel preview-panel">
-        <div class="preview-label">Preview</div>
-        <iframe id="preview" class="preview-frame" title="Worksheet preview"></iframe>
-      </section>
-    </div>
+    <footer class="hero-footer">made with ♥ for hanzi practice</footer>
   </main>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/landing.js"></script>
 </body>
 </html>

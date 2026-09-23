@@ -21,7 +21,7 @@ module.exports = defineConfig({
         theme_color: "#ff7cbb",
         background_color: "#ffe3f4",
         display: "standalone",
-        start_url: "/",
+        start_url: "/app",
         icons: [
           { src: "icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any maskable" },
         ],
@@ -53,5 +53,12 @@ module.exports = defineConfig({
   build: {
     outDir: path.resolve(repoRoot, "apps/web/dist"),
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        // Landing page at "/", the app at "/app".
+        main: path.resolve(repoRoot, "apps/web/index.html"),
+        app: path.resolve(repoRoot, "apps/web/app/index.html"),
+      },
+    },
   },
 });

@@ -68,7 +68,13 @@ body {
   font-size: 12px;
   letter-spacing: 1px;
   color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
   text-shadow: 1px 1px 0 #d64f9a;
+}
+
+.title:hover {
+  color: #fff0f7;
 }
 
 .window-controls {

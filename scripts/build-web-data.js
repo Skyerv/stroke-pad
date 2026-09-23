@@ -20,8 +20,7 @@
 
 const fs = require("fs");
 const path = require("path");
-
-const { HSK_LESSON_DATA, getBooks } = require("../core/hsk");
+const { pathToFileURL } = require("url");
 
 const HANZI_DIR = path.join(__dirname, "..", "data", "hanzi");
 const OUT_DIR = path.join(__dirname, "..", "apps", "web", "public", "data");
@@ -58,7 +57,12 @@ function writeJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data), "utf8");
 }
 
-function main() {
+async function main() {
+  // core/ is ESM; load it via dynamic import so this CJS script works on any
+  // Node version (require(esm) needs Node >= 22.12, which the build host may lack).
+  const hskModuleUrl = pathToFileURL(path.join(__dirname, "..", "core", "hsk", "index.js")).href;
+  const { HSK_LESSON_DATA, getBooks } = await import(hskModuleUrl);
+
   console.log("Reading source datasets…");
   const dictEntries = toEntries(readJson("cedict.json"), "token").filter((e) => e && e.token);
   const strokeEntries = toEntries(readJson("strokes.json"), "hanzi").filter((e) => e && e.hanzi);
@@ -154,4 +158,7 @@ function main() {
   console.log(`\nDone → ${OUT_DIR}`);
 }
 
-main();
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

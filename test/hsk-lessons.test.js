@@ -1,7 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { HSK_LESSON_DATA, getBooks, getLessonVocabulary } = require("../src/data/hsk");
+const { HSK_LESSON_DATA, getBooks, getLessonVocabulary } = require("../core/hsk");
 
 test("selector exposes 7 books, HSK 1 through HSK 5 with the 上/下 split", () => {
   const books = getBooks();

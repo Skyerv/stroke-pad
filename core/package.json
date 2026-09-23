@@ -1,0 +1,7 @@
+{
+  "name": "@strokepad/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Platform-agnostic StrokePad engine + data (ES modules)."
+}

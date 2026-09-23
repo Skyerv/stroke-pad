@@ -1,12 +1,12 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const { APP_CONFIG } = require("../src/shared/constants/app-config");
-const { buildWorksheet } = require("../src/shared/utils/worksheet-builder");
+const { APP_CONFIG } = require("../core/constants/app-config");
+const { buildWorksheet } = require("../core/worksheet/worksheet-builder");
 const {
   normalizePracticeRows,
   parsePracticeInput,
-} = require("../src/shared/utils/worksheet-parser");
+} = require("../core/worksheet/worksheet-parser");
 
 function countSections(html) {
   return (html.match(/<section class="entry">/g) || []).length;

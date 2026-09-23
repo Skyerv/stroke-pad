@@ -3,33 +3,43 @@
   "version": "0.1.0",
   "private": true,
   "description": "Local Electron app for generating Hanzi practice sheets",
-  "main": "src/main/index.js",
+  "main": "apps/desktop/main/index.js",
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
     "test": "node --test",
     "generate:hsk": "node scripts/generate-hsk-data.js",
+    "build:web-data": "node scripts/build-web-data.js",
+    "dev:web": "vite",
+    "build:web": "npm run build:web-data && vite build",
+    "preview:web": "vite preview",
     "build": "electron-builder"
   },
-  "dependencies": { },
   "devDependencies": {
+    "@fontsource/pixelify-sans": "^5.3.0",
+    "@fontsource/silkscreen": "^5.3.0",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "electron": "^37.3.1",
     "electron-builder": "^26.8.1",
-    "electron": "^37.3.1"
+    "vite": "^5.4.21",
+    "vite-plugin-pwa": "^1.3.0"
   },
   "build": {
     "appId": "com.strokepad.app",
     "productName": "StrokePad",
     "directories": {
-      "buildResources": "src/assets"
+      "buildResources": "apps/desktop/assets"
     },
     "files": [
-      "src/**/*",
+      "apps/desktop/**/*",
+      "core/**/*",
+      "data/hanzi/**/*",
       "package.json",
       "README.md"
     ],
     "win": {
       "target": "nsis",
-      "icon": "src/assets/icon.png"
+      "icon": "apps/desktop/assets/icon.png"
     }
   }
 }

@@ -4,8 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ff7cbb">
-  <meta name="description" content="StrokePad turns HSK lessons or your own hanzi into printable stroke-practice worksheets — cute, free, and works offline.">
-  <title>StrokePad — Kawaii Hanzi Practice Sheets</title>
+
+  <title>StrokePad — Create Hanzi Practice Sheets</title>
+  <meta name="description" content="Create printable Chinese hanzi practice sheets with correct stroke order. Generate your own handwriting worksheets from HSK 1–5 vocabulary or any text — free, no sign-up, works offline.">
+  <meta name="keywords" content="hanzi practice sheets, create hanzi sheets, Chinese writing practice sheet, hanzi worksheet generator, HSK vocabulary practice, Chinese character stroke order, printable Chinese practice sheets, learn Chinese handwriting">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="/">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="StrokePad">
+  <meta property="og:title" content="StrokePad — Create Hanzi Practice Sheets">
+  <meta property="og:description" content="Generate printable Chinese handwriting worksheets with correct stroke order, from HSK 1–5 vocabulary or your own text. Free and no sign-up.">
+  <meta property="og:image" content="/icon.svg">
+  <meta property="og:url" content="/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="StrokePad — Create Hanzi Practice Sheets">
+  <meta name="twitter:description" content="Printable Chinese hanzi practice sheets with correct stroke order — from HSK 1–5 or your own text.">
+  <meta name="twitter:image" content="/icon.svg">
+
+  <!-- Upgrade URL-based tags to absolute at runtime (search crawlers render JS). -->
+  <script>
+    (function () {
+      var origin = location.origin;
+      var href = origin + location.pathname;
+      var img = origin + "/icon.svg";
+      function setAttr(sel, attr, val) { var el = document.querySelector(sel); if (el) el.setAttribute(attr, val); }
+      setAttr('link[rel="canonical"]', "href", href);
+      setAttr('meta[property="og:url"]', "content", href);
+      setAttr('meta[property="og:image"]', "content", img);
+      setAttr('meta[name="twitter:image"]', "content", img);
+    })();
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "StrokePad",
+      "description": "Create printable Chinese hanzi handwriting practice sheets with correct stroke order, from HSK 1–5 vocabulary or your own text.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any (web browser)",
+      "inLanguage": "en",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  </script>
 </head>
 <body class="landing">
   <span class="deco deco-star s1" aria-hidden="true">✦</span>
@@ -24,25 +68,25 @@
       </div>
 
       <div class="hero-body">
-        <img class="hero-logo" src="/icon.svg" alt="StrokePad heart logo" width="112" height="112">
+        <img class="hero-logo" src="/icon.svg" alt="StrokePad pencil logo" width="112" height="112">
 
-        <p class="hero-eyebrow">♡ Kawaii Study Tool ♡</p>
+        <p class="hero-eyebrow">Chinese Handwriting Practice</p>
         <h1 class="hero-title">StrokePad</h1>
-        <p class="hero-tagline">Turn HSK lessons or your own hanzi into pretty,<br>printable stroke-practice worksheets. ⋆｡°✩</p>
+        <p class="hero-tagline">Create printable hanzi practice sheets with correct stroke order —<br>from HSK 1–5 vocabulary or your own text.</p>
 
         <ul class="hero-features">
-          <li>✿ HSK 1–5 presets</li>
-          <li>✎ Real stroke order</li>
-          <li>🖨 Printable PDF</li>
-          <li>❤ Free &amp; offline</li>
+          <li>HSK 1–5 vocabulary</li>
+          <li>Correct stroke order</li>
+          <li>Print or save as PDF</li>
+          <li>Free · works offline</li>
         </ul>
 
-        <a class="hero-cta" href="/app/">✿ Enter StrokePad ✿</a>
-        <p class="hero-note">No sign-up · works right in your browser</p>
+        <a class="hero-cta" href="/app/">Create a practice sheet →</a>
+        <p class="hero-note">No account needed — runs entirely in your browser</p>
       </div>
     </div>
 
-    <footer class="hero-footer">made with ♥ for hanzi practice</footer>
+    <footer class="hero-footer">StrokePad · Free hanzi practice sheet generator</footer>
   </main>
 
   <script type="module" src="/src/landing.js"></script>

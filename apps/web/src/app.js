@@ -189,7 +189,7 @@ export class WebApp {
       await this.printer.render(sheet.html);
       this.printBtn.disabled = false;
       const n = sheet.entries.length;
-      this.setStatus(`Ready — ${n} ${n === 1 ? "entry" : "entries"} ♥`);
+      this.setStatus(`Ready — ${n} ${n === 1 ? "entry" : "entries"}`);
     } catch (error) {
       this.setStatus(`Error: ${error.message}`);
     } finally {

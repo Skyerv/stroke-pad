@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ff7cbb">
-  <title>StrokePad — Hanzi Practice Sheets</title>
+  <title>StrokePad — Hanzi Practice Sheet Generator</title>
+  <meta name="description" content="Generate printable Chinese hanzi practice sheets with correct stroke order from HSK 1–5 vocabulary or your own text.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
 </head>
 <body>
   <div class="titlebar">
-    <a class="title" href="/" title="Back to home">♥ StrokePad</a>
+    <a class="title" href="/" title="Back to home">StrokePad</a>
     <div class="window-controls" aria-hidden="true">
       <span class="fake-btn">–</span>
       <span class="fake-btn">□</span>
@@ -22,9 +25,9 @@
     <span class="deco deco-star deco-star-2" aria-hidden="true">✧</span>
 
     <header class="app-header">
-      <p class="eyebrow">♡ Study Mode ♡</p>
+      <p class="eyebrow">HSK 1–5 · Custom text</p>
       <h1>Hanzi Practice Sheet Generator</h1>
-      <p class="subtitle">Pick an HSK lesson or paste your own hanzi, then print a practice sheet. ⋆｡°✩</p>
+      <p class="subtitle">Choose an HSK lesson or paste your own hanzi, then generate a printable practice sheet.</p>
     </header>
 
     <div class="layout">
@@ -49,7 +52,7 @@
         </div>
 
         <div class="button-row">
-          <button id="generate-btn" class="generate-btn" type="button">✿ Generate ✿</button>
+          <button id="generate-btn" class="generate-btn" type="button">Generate</button>
           <button id="print-btn" class="ghost-btn" type="button" disabled>🖨 Print / Save PDF</button>
           <button id="share-btn" class="ghost-btn" type="button">🔗 Copy link</button>
         </div>
